@@ -1,4 +1,4 @@
-import { novel } from "@/lib/content";
+import { offCode } from "@/lib/content";
 import Label from "../Label";
 import Typewriter from "../Typewriter";
 
@@ -7,7 +7,7 @@ export default function Novel() {
     <section className="section novel" id="roman">
       <Label>En dehors du code</Label>
       <blockquote className="novel__quote" data-reveal>
-        <Typewriter text={novel} />
+        <Typewriter texts={offCode} />
       </blockquote>
     </section>
   );

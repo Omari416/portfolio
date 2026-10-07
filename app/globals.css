@@ -976,12 +976,14 @@ img { display: block; max-width: 100%; }
 .novel__quote { margin: 30px 0 0; padding: 0; max-width: 980px; }
 .novel__quote p {
   margin: 0;
-  min-height: 3.6em;
   font-family: var(--serif);
   font-size: clamp(32px, 4.6vw, 58px);
   line-height: 1.15;
 }
-.novel__quote p::after {
+.typewriter { display: grid; }
+.typewriter > span { grid-area: 1 / 1; }
+.typewriter__ghost { visibility: hidden; }
+.typewriter__text::after {
   content: "";
   display: inline-block;
   width: 3px;

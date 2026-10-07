@@ -107,8 +107,12 @@ export const stackRows = [
 
 export const dailyTools = ["Claude Code", "Cursor", "Antigravity"];
 
-export const novel =
-  "J'écris un roman qui se déroule en RDC. Un projet au long cours, qui nourrit ma façon de raconter les produits que je construis.";
+// "En dehors du code" : phrases tapées puis effacées en boucle.
+export const offCode = [
+  "J'écris un roman qui se déroule en RDC. Un projet au long cours, qui nourrit ma façon de raconter les produits que je construis.",
+  "Je joue aux échecs. Mon meilleur Elo sur Chess.com : 1060.",
+  "Et je joue du piano.",
+];
 
 // TODO : remplacer par tes vrais liens publics
 export const contact = {
