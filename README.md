@@ -1,7 +1,16 @@
 # Portfolio · Kayumba Omari
 
-Ingénieur Full Stack web & mobile. Site statique (HTML, CSS, JS), sans build : ouvrir `index.html`.
+Ingénieur Full Stack web & mobile. Next.js (App Router) + TypeScript.
 
-- `css/style.css` : styles et animations
-- `js/main.js` : timeline d'intro, scroll, interactions
-- `assets/omari.jpg` : photo du header (monogramme « KO » en attendant)
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build && npm start
+```
+
+- `lib/content.ts` : tous les textes (projets, étapes, formations, stack, contact)
+- `app/globals.css` : styles et animations
+- `components/IntroShell.tsx` : timeline d'intro du header (phases p1 → p6)
+- `components/Hero.tsx` : header (fenêtre, carrousel, curseurs, faisceau)
+- `components/sections/` : sections de la page
+- `public/omari.jpg` : photo du header (monogramme « KO » en attendant)

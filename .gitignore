@@ -1,2 +1,10 @@
 # Vidéo de référence (inspiration), pas à publier
 porto.mp4
+
+# Next.js
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
