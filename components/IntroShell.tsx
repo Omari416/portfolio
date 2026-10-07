@@ -16,8 +16,10 @@ const PHASE_TIMES = [80, 1150, 2050, 3300, 3850, 4700];
 
 export default function IntroShell({ children }: { children: React.ReactNode }) {
   const [phase, setPhase] = useState(0);
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
+    setLive(true);
     const timers: ReturnType<typeof setTimeout>[] = [];
     const events = ["wheel", "keydown", "touchstart"] as const;
 
@@ -36,6 +38,7 @@ export default function IntroShell({ children }: { children: React.ReactNode }) 
     // Centre the stage vertically while the rest of the hero is still hidden.
     const stage = document.getElementById("stage");
     if (stage) {
+      stage.style.setProperty("--intro-y", "0px"); // measure from the resting position
       const r = stage.getBoundingClientRect();
       const offset = innerHeight / 2 - (r.top + r.height / 2);
       stage.style.setProperty("--intro-y", `${Math.max(0, offset)}px`);
@@ -57,6 +60,6 @@ export default function IntroShell({ children }: { children: React.ReactNode }) 
     };
   }, []);
 
-  const classes = ["site", ...PHASE_TIMES.slice(0, phase).map((_, i) => `p${i + 1}`)];
-  return <div className={classes.join(" ")}>{children}</div>;
+  const classes = ["site", live && "is-live", ...PHASE_TIMES.slice(0, phase).map((_, i) => `p${i + 1}`)];
+  return <div className={classes.filter(Boolean).join(" ")}>{children}</div>;
 }

@@ -40,6 +40,16 @@ a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 ::selection { background: var(--accent); color: #fff; }
 
+/* Failsafe: if the JS never boots (blocked chunks, old browser),
+   reveal everything after a short delay instead of leaving the page blank. */
+.site:not(.is-live) :is(.nav, .beam, .window, .track, .tag, .card__photo, .hero__title .w,
+  .hero__sub, .hero__cta, .marquee, [data-reveal], .pills li) {
+  animation: failsafe .8s ease 2.5s forwards;
+}
+@keyframes failsafe {
+  to { opacity: 1; translate: 0 0; filter: none; scale: 1; color: var(--text); }
+}
+
 /* ---------------------------------------------------------
    NAV
    --------------------------------------------------------- */
