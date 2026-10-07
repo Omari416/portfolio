@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kayumba Omari · Ingénieur Full Stack web & mobile</title>
+  <meta name="description" content="Kayumba Omari, ingénieur Full Stack web & mobile basé à Tunis. Je conçois et développe des produits numériques de bout en bout, pensés pour les réalités de l'Afrique francophone." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="is-intro">
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#accueil" class="nav__logo" aria-label="Accueil">KO</a>
+    <nav class="nav__links" aria-label="Navigation principale">
+      <a href="#accueil" class="is-active">Accueil</a>
+      <a href="#projets">Projets</a>
+      <a href="#formateur">Formations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="accueil">
+      <div class="beam" aria-hidden="true">
+        <div class="beam__light"></div>
+        <canvas class="beam__dust" id="dust"></canvas>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="window" aria-hidden="true">
+          <div class="window__bar"><i></i><i></i><i></i></div>
+          <div class="window__view">
+            <div class="track" id="track">
+              <div class="card"><b></b></div>
+              <div class="card"><b></b></div>
+              <div class="card"><b></b></div>
+              <div class="card"><b></b></div>
+              <div class="card card--main">
+                <b></b>
+                <div class="card__photo">
+                  <span class="card__mono">KO</span>
+                  <img src="assets/omari.jpg" alt="" onerror="this.remove()" />
+                </div>
+              </div>
+              <div class="card"><b></b></div>
+              <div class="card"><b></b></div>
+              <div class="card"><b></b></div>
+              <div class="card"><b></b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag tag--role" data-depth="18">
+          <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+          <span>Full Stack Web &amp; Mobile</span>
+        </div>
+        <div class="tag tag--hello" data-depth="-14">
+          <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+          <span>Salut, moi c'est Kayumba Omari</span>
+        </div>
+      </div>
+
+      <div class="hero__copy">
+        <h1 class="hero__title" id="heroTitle">Je conçois et développe des produits numériques de bout en bout</h1>
+        <p class="hero__sub">
+          En tant qu'<span class="chip">Ingénieur Full Stack</span>, je construis des produits
+          pensés pour les réalités de l'Afrique francophone, de l'idée au produit déployé.
+        </p>
+        <div class="hero__cta">
+          <a href="#contact" class="btn btn--light" data-magnetic>Écrivons-nous</a>
+          <a href="#projets" class="btn btn--dark" data-magnetic>Voir mes projets</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-label="Compétences">
+      <div class="marquee__track" data-marquee>
+        <span>Paiements Mobile Money</span>
+        <span>React Native &amp; Expo</span>
+        <span>Next.js &amp; NestJS</span>
+        <span>Architecture produit</span>
+        <span>IA appliquée</span>
+        <span>Automatisation n8n</span>
+        <span>Prisma &amp; PostgreSQL</span>
+        <span>Mise en production</span>
+      </div>
+    </div>
+
+    <!-- ============ À PROPOS ============ -->
+    <section class="section about" id="apropos">
+      <div class="label" data-reveal>
+        <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+        <span>À propos</span>
+      </div>
+      <p class="about__text" id="aboutText">
+        Je suis ingénieur Full Stack, titulaire d'un master en ingénierie des systèmes d'information
+        et basé à Tunis. Je travaille à distance pour Nextise GmbH et j'accompagne en parallèle des
+        clients en freelance. Mon terrain de jeu : le web, le mobile et l'IA appliquée, quand la technique
+        sert un besoin concret. Payer par Mobile Money, former des jeunes au numérique, donner accès
+        à du contenu de qualité en français.
+      </p>
+      <ul class="facts" data-reveal>
+        <li><strong>Master</strong><span>Ingénierie des SI</span></li>
+        <li><strong>Tunis</strong><span>Basé en Tunisie</span></li>
+        <li><strong>Nextise GmbH</strong><span>Full remote</span></li>
+        <li><strong>Freelance</strong><span>Clients en direct</span></li>
+      </ul>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section process" id="process">
+      <div class="label" data-reveal>
+        <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+        <span>De l'idée au produit déployé</span>
+      </div>
+      <h2 class="section__title" data-reveal>Un seul interlocuteur,<br /><em>du cadrage à la prod.</em></h2>
+      <div class="steps" id="steps">
+        <div class="steps__line"><i id="stepsFill"></i></div>
+        <article class="step"><span class="step__n">01</span><h3>Cadrage</h3><p>Comprendre le besoin réel, les utilisateurs et le contexte terrain.</p></article>
+        <article class="step"><span class="step__n">02</span><h3>Cahier des charges</h3><p>Un périmètre clair, écrit, partagé avant la première ligne de code.</p></article>
+        <article class="step"><span class="step__n">03</span><h3>Backlog</h3><p>Des user stories priorisées, livrables par itérations courtes.</p></article>
+        <article class="step"><span class="step__n">04</span><h3>Architecture</h3><p>Modèle de données, API, choix techniques taillés pour durer.</p></article>
+        <article class="step"><span class="step__n">05</span><h3>Développement</h3><p>Web, mobile et IA, avec un code typé, testé et lisible.</p></article>
+        <article class="step"><span class="step__n">06</span><h3>Mise en production</h3><p>Déploiement, monitoring et itérations avec les vrais utilisateurs.</p></article>
+      </div>
+    </section>
+
+    <!-- ============ PROJETS ============ -->
+    <section class="section projects" id="projets">
+      <div class="label" data-reveal>
+        <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+        <span>Ce que je construis</span>
+      </div>
+      <h2 class="section__title" data-reveal>Des produits qui partent<br /><em>d'un besoin concret.</em></h2>
+
+      <div class="grid">
+        <!-- Siyé -->
+        <article class="project" data-reveal data-glow>
+          <div class="project__chrome"><i></i><i></i><i></i><span>siye.app</span></div>
+          <div class="project__visual visual-siye" aria-hidden="true">
+            <div class="phone">
+              <div class="phone__notch"></div>
+              <div class="phone__row"><b></b><span></span></div>
+              <div class="phone__row"><b></b><span></span></div>
+              <div class="phone__pay">Payer 25 000 FC</div>
+            </div>
+            <span class="pay pay--om">Orange Money</span>
+            <span class="pay pay--mp">M-Pesa</span>
+            <span class="pay pay--am">Airtel Money</span>
+          </div>
+          <div class="project__body">
+            <p class="project__kind">Marketplace mobile-first</p>
+            <h3>Siyé</h3>
+            <p>Marketplace pour travailleurs indépendants en Afrique de l'Ouest et en RDC, avec paiements Mobile Money (Orange Money, M-Pesa, Airtel Money) et messagerie temps réel.</p>
+            <ul class="stack"><li>React Native / Expo</li><li>Node.js</li><li>TypeScript</li><li>PostgreSQL</li><li>Prisma</li></ul>
+          </div>
+        </article>
+
+        <!-- Kontakly -->
+        <article class="project" data-reveal data-glow>
+          <div class="project__chrome"><i></i><i></i><i></i><span>kontakly.com</span></div>
+          <div class="project__visual visual-kontakly" aria-hidden="true">
+            <div class="mail">
+              <div class="mail__head"><span class="spark">✦</span> Email généré par IA</div>
+              <div class="mail__line" style="--w:92%"></div>
+              <div class="mail__line" style="--w:78%"></div>
+              <div class="mail__line" style="--w:85%"></div>
+              <div class="mail__line" style="--w:54%"></div>
+            </div>
+            <div class="leads">
+              <span>Leads trouvés</span><strong data-count="1284">0</strong>
+            </div>
+          </div>
+          <div class="project__body">
+            <p class="project__kind">SaaS B2B · Prospection &amp; CRM</p>
+            <h3>Kontakly</h3>
+            <p>Prospection par email et CRM : génération d'emails par IA, gestion de campagnes, recherche de leads et planification.</p>
+            <ul class="stack"><li>Flask</li><li>PostgreSQL</li><li>Kubernetes</li><li>IA</li></ul>
+          </div>
+        </article>
+
+        <!-- Narrat -->
+        <article class="project" data-reveal data-glow>
+          <div class="project__chrome"><i></i><i></i><i></i><span>narrat.app</span></div>
+          <div class="project__visual visual-narrat" aria-hidden="true">
+            <div class="modules" id="modules"></div>
+            <div class="narrat-stats">
+              <span><strong>13</strong> modules</span>
+              <span><strong>60+</strong> modèles</span>
+              <span><strong>29</strong> écrans</span>
+            </div>
+          </div>
+          <div class="project__body">
+            <p class="project__kind">Plateforme de contenu francophone</p>
+            <h3>Narrat</h3>
+            <p>Plateforme de contenu en français en 13 modules, avec plus de 60 modèles de données et 29 écrans conçus.</p>
+            <ul class="stack"><li>NestJS</li><li>Prisma</li><li>React Native</li></ul>
+          </div>
+        </article>
+
+        <!-- Siyé Hub -->
+        <article class="project" data-reveal data-glow>
+          <div class="project__chrome"><i></i><i></i><i></i><span>hub.siye.app</span></div>
+          <div class="project__visual visual-hub" aria-hidden="true">
+            <div class="course"><span>Bases du web</span><i style="--p:100%"></i></div>
+            <div class="course"><span>JavaScript</span><i style="--p:72%"></i></div>
+            <div class="course"><span>IA &amp; prompts</span><i style="--p:45%"></i></div>
+            <div class="course"><span>Mobile</span><i style="--p:18%"></i></div>
+          </div>
+          <div class="project__body">
+            <p class="project__kind">Écosystème edtech</p>
+            <h3>Siyé Hub</h3>
+            <p>Un écosystème pour démocratiser les compétences numériques en Afrique francophone.</p>
+            <ul class="stack"><li>Next.js</li><li>Prisma</li><li>PostgreSQL</li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ FORMATEUR ============ -->
+    <section class="section trainer" id="formateur">
+      <div class="label" data-reveal>
+        <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+        <span>Formateur</span>
+      </div>
+      <h2 class="section__title" data-reveal>Transmettre fait partie<br /><em>de mon métier.</em></h2>
+
+      <div class="trainer__grid">
+        <article class="bootcamp" data-reveal data-glow>
+          <p class="project__kind">Bootcamp</p>
+          <div class="bootcamp__big"><span data-count="4">0</span><small>mois</small></div>
+          <h3>Bootcamp MERN</h3>
+          <p>MongoDB, Express, React et Node, avec les outils d'IA intégrés au quotidien du développeur.</p>
+          <div class="bootcamp__bar"><i></i></div>
+        </article>
+        <div class="courses" data-reveal>
+          <p class="courses__intro">Je conçois aussi des formations complètes :</p>
+          <ul class="pills">
+            <li>IA &amp; prompt engineering</li>
+            <li>Automatisation avec n8n</li>
+            <li>Power BI</li>
+            <li>Word</li>
+            <li>Excel</li>
+            <li>Access</li>
+            <li>Git</li>
+            <li>Bases de données</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section class="section stack-section" id="stack">
+      <div class="label" data-reveal>
+        <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+        <span>Stack</span>
+      </div>
+      <h2 class="section__title" data-reveal>Les outils avec lesquels<br /><em>je livre.</em></h2>
+    </section>
+    <div class="marquee marquee--big">
+      <div class="marquee__track" data-marquee>
+        <span>MERN</span><span>Next.js</span><span>TypeScript</span><span>NestJS</span><span>Prisma</span><span>PostgreSQL</span>
+      </div>
+    </div>
+    <div class="marquee marquee--big marquee--reverse">
+      <div class="marquee__track" data-marquee>
+        <span>React Native</span><span>Expo</span><span>Flask</span><span>Kubernetes</span><span>n8n</span><span>Agents IA</span>
+      </div>
+    </div>
+    <section class="section daily">
+      <p class="daily__label" data-reveal>Au quotidien</p>
+      <ul class="daily__list" data-reveal>
+        <li>Claude Code</li><li>Cursor</li><li>Antigravity</li>
+      </ul>
+    </section>
+
+    <!-- ============ ROMAN ============ -->
+    <section class="section novel" id="roman">
+      <div class="label" data-reveal>
+        <svg class="tag__cursor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.2 1.2 6.6 15l2.1-5.6 5.9-2.3z"/></svg>
+        <span>En dehors du code</span>
+      </div>
+      <blockquote class="novel__quote" data-reveal>
+        <p id="typewriter" data-text="J'écris un roman qui se déroule en RDC. Un projet au long cours, qui nourrit ma façon de raconter les produits que je construis."></p>
+      </blockquote>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="beam beam--contact" aria-hidden="true"><div class="beam__light"></div></div>
+      <p class="contact__kicker" data-reveal>Un projet, une formation, une collaboration ?</p>
+      <h2 class="contact__title" data-reveal>Écrivons-nous.</h2>
+      <div class="hero__cta" data-reveal>
+        <!-- TODO : remplacer par ton adresse e-mail publique -->
+        <a href="mailto:contact@exemple.com" class="btn btn--light" data-magnetic>contact@exemple.com</a>
+        <!-- TODO : remplacer par ton URL LinkedIn -->
+        <a href="https://www.linkedin.com/" class="btn btn--dark" target="_blank" rel="noopener" data-magnetic>LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Kayumba Omari</span>
+    <span>Ingénieur Full Stack web &amp; mobile · Tunis</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
