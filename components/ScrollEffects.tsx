@@ -28,7 +28,10 @@ export default function ScrollEffects() {
     const aboutText = document.getElementById("aboutText");
     const aboutWords = aboutText ? [...aboutText.querySelectorAll(".w")] : [];
     const steps = document.getElementById("steps");
-    const stepEls = steps ? [...steps.querySelectorAll(".step")] : [];
+    const stepEls = steps ? [...steps.querySelectorAll<HTMLElement>(".step")] : [];
+    const stepsNow = document.getElementById("stepsNow");
+    const stepsNowTitle = document.getElementById("stepsNowTitle");
+    const phaseEls = [...document.querySelectorAll<HTMLElement>("[data-phase]")];
 
     const onScroll = () => {
       const vh = innerHeight;
@@ -38,10 +41,26 @@ export default function ScrollEffects() {
         aboutWords.forEach((w, i) => w.classList.toggle("is-lit", i < lit));
       }
       if (steps) {
+        // A step lights up once its top crosses 60% of the viewport.
+        const mark = vh * 0.6;
         const r = steps.getBoundingClientRect();
-        const p = clamp((vh * 0.78 - r.top) / (r.height + vh * 0.15));
-        steps.style.setProperty("--progress", p.toFixed(3));
-        stepEls.forEach((s, i) => s.classList.toggle("is-lit", p >= i / stepEls.length + 0.04));
+        steps.style.setProperty("--progress", clamp((mark - r.top) / r.height).toFixed(3));
+        let current = -1;
+        stepEls.forEach((s, i) => {
+          const lit = s.getBoundingClientRect().top < mark;
+          s.classList.toggle("is-lit", lit);
+          if (lit) current = i;
+        });
+        stepEls.forEach((s, i) => s.classList.toggle("is-current", i === current));
+        const shown = Math.max(current, 0);
+        if (stepsNow) stepsNow.textContent = String(shown + 1).padStart(2, "0");
+        if (stepsNowTitle) stepsNowTitle.textContent = stepEls[shown]?.dataset.title ?? "";
+        phaseEls.forEach((ph, i) => {
+          const from = Number(ph.dataset.phase);
+          const next = phaseEls[i + 1] ? Number(phaseEls[i + 1].dataset.phase) : Infinity;
+          ph.classList.toggle("is-lit", current >= from);
+          ph.classList.toggle("is-current", current >= from && current < next);
+        });
       }
     };
     let ticking = false;

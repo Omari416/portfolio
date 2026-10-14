@@ -33,13 +33,67 @@ export const facts = [
   { title: "Freelance", text: "Clients en direct" },
 ];
 
-export const steps = [
-  { title: "Cadrage", text: "Comprendre le besoin réel, les utilisateurs et le contexte terrain." },
-  { title: "Cahier des charges", text: "Un périmètre clair, écrit, partagé avant la première ligne de code." },
-  { title: "Backlog", text: "Des user stories priorisées, livrables par itérations courtes." },
-  { title: "Architecture", text: "Modèle de données, API, choix techniques taillés pour durer." },
-  { title: "Développement", text: "Web, mobile et IA, avec un code typé, testé et lisible." },
-  { title: "Mise en production", text: "Déploiement, monitoring et itérations avec les vrais utilisateurs." },
+export const processLead =
+  "Six étapes, trois phases, un seul responsable. Chaque étape se termine par un livrable écrit et une décision prise avec vous : rien n'avance sur une hypothèse.";
+
+export const processPhases = ["Comprendre", "Concevoir", "Livrer"];
+
+export const steps: {
+  phase: number;
+  title: string;
+  lead: string;
+  text: string;
+  deliverables: string[];
+  gate: string;
+}[] = [
+  {
+    phase: 0,
+    title: "Cadrage",
+    lead: "Partir du problème, pas de la solution.",
+    text: "Entretiens utilisateurs, observation terrain et cartographie des contraintes réelles : réseau, moyens de paiement, usages, budget.",
+    deliverables: ["Note de cadrage", "Personas", "Carte des risques"],
+    gate: "Go / no-go sur la valeur",
+  },
+  {
+    phase: 0,
+    title: "Cahier des charges",
+    lead: "Un périmètre qu'on peut signer.",
+    text: "Exigences fonctionnelles et non fonctionnelles, hors-périmètre explicite et critères d'acceptation mesurables.",
+    deliverables: ["Spécifications", "Critères d'acceptation", "Hors-périmètre"],
+    gate: "Périmètre validé",
+  },
+  {
+    phase: 1,
+    title: "Backlog",
+    lead: "Découper pour livrer tôt.",
+    text: "Épopées et user stories priorisées par valeur et par risque, un MVP clairement délimité, des itérations d'une à deux semaines.",
+    deliverables: ["Roadmap", "Backlog priorisé", "Définition du MVP"],
+    gate: "MVP arrêté",
+  },
+  {
+    phase: 1,
+    title: "Architecture",
+    lead: "Des décisions écrites, réversibles quand c'est possible.",
+    text: "Modèle de données, contrats d'API, sécurité et stratégie de déploiement. Chaque choix structurant est documenté avec ses alternatives.",
+    deliverables: ["Schéma de données", "Contrats d'API", "ADR"],
+    gate: "Revue d'architecture",
+  },
+  {
+    phase: 2,
+    title: "Développement",
+    lead: "Du code qu'une autre équipe peut reprendre.",
+    text: "TypeScript strict, tests sur les parcours critiques, revue de code et intégration continue. Une démo à chaque fin d'itération.",
+    deliverables: ["Démos d'itération", "Tests automatisés", "CI"],
+    gate: "Recette utilisateur",
+  },
+  {
+    phase: 2,
+    title: "Mise en production",
+    lead: "La mise en ligne n'est qu'un début.",
+    text: "Déploiement automatisé, monitoring et alertes, plan de retour arrière, puis itérations guidées par les données d'usage.",
+    deliverables: ["Pipeline CD", "Monitoring", "Runbook"],
+    gate: "Lancement et suivi",
+  },
 ];
 
 export type ProjectVisual = "siye" | "kontakly" | "narrat" | "hub";
