@@ -1,5 +1,6 @@
 import { processLead, processPhases, steps } from "@/lib/content";
 import Label from "../Label";
+import StepList from "../StepList";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -38,26 +39,7 @@ export default function Process() {
           </ol>
         </aside>
 
-        <div className="steps" id="steps">
-          <div className="steps__line"><i /></div>
-          {steps.map((s, i) => (
-            <article className="step" key={s.title} data-title={s.title}>
-              <div className="step__head">
-                <span className="step__n">{pad(i + 1)}</span>
-                <span className="step__phase">{processPhases[s.phase]}</span>
-              </div>
-              <h3>{s.title}</h3>
-              <p className="step__lead">{s.lead}</p>
-              <p>{s.text}</p>
-              <div className="step__foot">
-                <ul className="step__deliverables" aria-label="Livrables">
-                  {s.deliverables.map((d) => <li key={d}>{d}</li>)}
-                </ul>
-                <span className="step__gate">Jalon : {s.gate}</span>
-              </div>
-            </article>
-          ))}
-        </div>
+        <StepList />
       </div>
     </section>
   );
