@@ -242,6 +242,69 @@ export const trainings = [
   "Bases de données",
 ];
 
+export const lessonThemes = ["Excel", "Word", "Python", "Java / POO"] as const;
+export type LessonTheme = (typeof lessonThemes)[number];
+
+// Extraits de vraies sessions. Fichiers attendus : public/formations/<id>.mp4 et <id>.jpg (poster).
+// Tant qu'un fichier manque, la carte affiche « Extrait en préparation ».
+export const lessons: {
+  id: string;
+  theme: LessonTheme;
+  title: string;
+  summary: string;
+  points: string[];
+}[] = [
+  {
+    id: "excel-si-et-ou",
+    theme: "Excel",
+    title: "SI, ET, OU : décider à partir des données",
+    summary: "Construire une colonne « admis / recalé » à partir des notes et du taux de présence, puis la vérifier ligne par ligne.",
+    points: ["Imbriquer SI avec ET / OU", "Lire une formule pas à pas pour la corriger", "Recopier une formule sans casser les références"],
+  },
+  {
+    id: "python-decorateurs",
+    theme: "Python",
+    title: "Les décorateurs Python, expliqués de zéro",
+    summary: "Partir des fonctions imbriquées pour arriver, étape par étape, à écrire son propre décorateur.",
+    points: ["Fonctions imbriquées et portée des variables", "Fonctions qui retournent des fonctions", "Écrire et appliquer un décorateur"],
+  },
+  {
+    id: "java-heritage",
+    theme: "Java / POO",
+    title: "Héritage et polymorphisme : gestion des employés",
+    summary: "Un cas d'entreprise pour modéliser des employés, des commerciaux et des freelances, et calculer chaque salaire.",
+    points: ["Classes, attributs et constructeurs", "Héritage et redéfinition de méthodes", "Polymorphisme sur une liste d'objets"],
+  },
+  {
+    id: "excel-mise-en-forme",
+    theme: "Excel",
+    title: "Mise en forme conditionnelle sur un tableau RH",
+    summary: "Faire ressortir automatiquement les bonnes et les mauvaises évaluations d'une équipe.",
+    points: ["Règles de mise en forme conditionnelle", "Formules dans les règles", "Rendre un tableau lisible en un coup d'œil"],
+  },
+  {
+    id: "word-examen",
+    theme: "Word",
+    title: "Examen Word : mise en page et fonctions de base",
+    summary: "Un sujet d'examen traité en direct : styles, mise en page et mise en forme d'un document professionnel.",
+    points: ["Marges, orientation et mise en page", "Styles et mise en forme cohérente", "Méthode pour traiter un sujet d'examen"],
+  },
+  {
+    id: "python-premiers-pas",
+    theme: "Python",
+    title: "Premiers programmes : saisie, fonctions et calculs",
+    summary: "Écrire ses premières fonctions et les tester dans le terminal, avec les erreurs et leur correction.",
+    points: ["Lire une saisie avec input()", "Écrire et appeler une fonction", "Comprendre et corriger un message d'erreur"],
+  },
+  {
+    id: "excel-exercice-note",
+    theme: "Excel",
+    title: "Exercice noté : calculs et analyse globale",
+    summary: "Un sujet en plusieurs parties notées, du calcul des moyennes à l'analyse d'ensemble d'une classe.",
+    points: ["Moyenne, minimum, maximum", "Analyse globale d'un jeu de données", "Gérer son temps sur un exercice noté"],
+  },
+];
+
 export const stackRows = [
   ["MERN", "Next.js", "TypeScript", "NestJS", "Prisma", "PostgreSQL"],
   ["React Native", "Expo", "Flask", "Kubernetes", "n8n", "Agents IA"],

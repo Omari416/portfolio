@@ -3,6 +3,7 @@
 import type { CSSProperties } from "react";
 import { useState } from "react";
 import { processPhases, steps } from "@/lib/content";
+import { processArts } from "./ProcessArt";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -14,18 +15,26 @@ export default function StepList() {
       <div className="steps__line"><i /></div>
       {steps.map((s, i) => {
         const isOpen = open === i;
+        const Art = processArts[i];
         return (
           // `data-open`, not className: ScrollEffects toggles is-lit / is-current on these.
           <article
             className="step"
             key={s.title}
             data-title={s.title}
+            data-phase-name={processPhases[s.phase]}
             data-open={isOpen || undefined}
             onTransitionEnd={(e) => {
               // Heights changed: let the scroll-driven line catch up.
               if (e.propertyName === "grid-template-rows") dispatchEvent(new Event("scroll"));
             }}
           >
+            {/* Inline illustration, shown on narrow screens where the sticky stage is hidden. */}
+            <div className="step__art" aria-hidden="true">
+              <div className="art">
+                <Art p={`step${i}`} />
+              </div>
+            </div>
             <div className="step__head">
               <span className="step__n">{pad(i + 1)}</span>
               <span className="step__phase">{processPhases[s.phase]}</span>

@@ -31,7 +31,21 @@ export default function ScrollEffects() {
     const stepEls = steps ? [...steps.querySelectorAll<HTMLElement>(".step")] : [];
     const stepsNow = document.getElementById("stepsNow");
     const stepsNowTitle = document.getElementById("stepsNowTitle");
+    const stepsNowPhase = document.getElementById("stepsNowPhase");
     const phaseEls = [...document.querySelectorAll<HTMLElement>("[data-phase]")];
+    const stageArts = [...document.querySelectorAll<HTMLElement>("[data-art]")];
+    const stageSegs = [...document.querySelectorAll<HTMLElement>("[data-seg]")];
+
+    // Replace a label's text with a short rise-in, only when it actually changes.
+    const swap = (el: HTMLElement | null, text: string) => {
+      if (!el || el.textContent === text) return;
+      el.textContent = text;
+      if (!prefersReducedMotion())
+        el.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], {
+          duration: 450,
+          easing: "cubic-bezier(.16, 1, .3, 1)",
+        });
+    };
 
     const onScroll = () => {
       const vh = innerHeight;
@@ -49,12 +63,20 @@ export default function ScrollEffects() {
         stepEls.forEach((s, i) => {
           const lit = s.getBoundingClientRect().top < mark;
           s.classList.toggle("is-lit", lit);
+          // Narrow screens: each step's own illustration plays once the step is reached.
+          s.querySelector(".art")?.classList.toggle("is-active", lit);
           if (lit) current = i;
         });
         stepEls.forEach((s, i) => s.classList.toggle("is-current", i === current));
         const shown = Math.max(current, 0);
-        if (stepsNow) stepsNow.textContent = String(shown + 1).padStart(2, "0");
-        if (stepsNowTitle) stepsNowTitle.textContent = stepEls[shown]?.dataset.title ?? "";
+        swap(stepsNow, String(shown + 1).padStart(2, "0"));
+        swap(stepsNowTitle, stepEls[shown]?.dataset.title ?? "");
+        swap(stepsNowPhase, stepEls[shown]?.dataset.phaseName ?? "");
+        stageArts.forEach((a, i) => a.classList.toggle("is-active", i === shown));
+        stageSegs.forEach((g, i) => {
+          g.classList.toggle("is-lit", i < shown);
+          g.classList.toggle("is-current", i === shown);
+        });
         phaseEls.forEach((ph, i) => {
           const from = Number(ph.dataset.phase);
           const next = phaseEls[i + 1] ? Number(phaseEls[i + 1].dataset.phase) : Infinity;
@@ -87,6 +109,27 @@ export default function ScrollEffects() {
       card.addEventListener("pointermove", move);
       cleanups.push(() => card.removeEventListener("pointermove", move));
     });
+
+    // Subtle 3D tilt toward the pointer.
+    if (hasFinePointer() && !prefersReducedMotion()) {
+      document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((el) => {
+        const move = (e: PointerEvent) => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty("--ry", `${((e.clientX - r.left) / r.width - 0.5) * 6}deg`);
+          el.style.setProperty("--rx", `${((e.clientY - r.top) / r.height - 0.5) * -6}deg`);
+        };
+        const leave = () => {
+          el.style.removeProperty("--rx");
+          el.style.removeProperty("--ry");
+        };
+        el.addEventListener("pointermove", move);
+        el.addEventListener("pointerleave", leave);
+        cleanups.push(() => {
+          el.removeEventListener("pointermove", move);
+          el.removeEventListener("pointerleave", leave);
+        });
+      });
+    }
 
     // Magnetic buttons.
     if (hasFinePointer() && !prefersReducedMotion()) {

@@ -1,9 +1,16 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import type { CSSProperties } from "react";
-import { trainings } from "@/lib/content";
+import { lessons, trainings } from "@/lib/content";
+import ClassroomGrid from "../ClassroomGrid";
 import Counter from "../Counter";
 import Label from "../Label";
 
+const hasFile = (id: string) => existsSync(path.join(process.cwd(), "public", "formations", `${id}.mp4`));
+
 export default function Trainer() {
+  const items = lessons.map((l) => ({ ...l, hasVideo: hasFile(l.id) }));
+
   return (
     <section className="section trainer" id="formateur">
       <Label>Formateur</Label>
@@ -12,6 +19,14 @@ export default function Trainer() {
         <br />
         <em>de mon métier.</em>
       </h2>
+      <p className="classroom__intro" data-reveal>
+        Des extraits de vraies sessions, enregistrées en visio avec mes apprenants. Pas de mise en scène :
+        un cas concret, de la pratique, et des corrections en direct.
+      </p>
+
+      <div className="classroom" data-reveal>
+        <ClassroomGrid items={items} />
+      </div>
 
       <div className="trainer__grid">
         <article className="bootcamp" data-reveal data-glow>

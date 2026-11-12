@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" fill="none" role="img" aria-label="A scope you can sign">
+  <defs>
+    <pattern id="scope-grid" width="24" height="24" x="8" y="12" patternUnits="userSpaceOnUse">
+      <path d="M0 0h24M0 0v24" stroke="#fff" stroke-opacity=".03" stroke-width="1.5"/>
+    </pattern>
+    <radialGradient id="scope-glow">
+      <stop stop-color="#ef4a2b" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#ef4a2b" stop-opacity="0"/>
+    </radialGradient>
+    <g id="scope-check">
+      <rect width="16" height="16" rx="4" stroke="#3d3d3d"/>
+      <path d="m4.5 8 2.5 2.5 4.5-5" stroke="#f2f2f2"/>
+    </g>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#scope-grid)"/>
+  <g stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="195" y="34" width="250" height="292" rx="16" stroke="#3d3d3d" stroke-dasharray="5 6"/>
+
+    <g stroke="#3d3d3d">
+      <rect x="101" y="112" width="72" height="42" rx="9" stroke="#2c2c2c"/>
+      <path d="M115 127h22m-22 10h34M109 145l56-24"/>
+      <rect x="467" y="203" width="72" height="42" rx="9" stroke="#2c2c2c"/>
+      <path d="M481 218h20m-20 10h37m-43 8 56-24"/>
+    </g>
+
+    <rect x="219" y="57" width="202" height="246" rx="12" stroke="#f2f2f2"/>
+    <path d="M247 84h58m-58 11h90" stroke="#3d3d3d"/>
+    <path d="M247 109h146m-146 116h146" stroke="#2c2c2c"/>
+
+    <use href="#scope-check" x="247" y="123"/>
+    <use href="#scope-check" x="247" y="156"/>
+    <use href="#scope-check" x="247" y="189"/>
+    <g stroke="#3d3d3d">
+      <path d="M276 128h97m-97 7h57m-57 26h76m-76 7h49m-49 26h91m-91 7h64"/>
+      <path d="M247 279h146"/>
+    </g>
+
+    <ellipse cx="316" cy="257" rx="78" ry="29" fill="url(#scope-glow)"/>
+    <path d="M252 269
+      C266 267 288 249 287 240
+      C286 232 272 247 269 260
+      C264 277 284 266 299 253
+      C291 268 297 272 311 259
+      C317 253 321 249 323 251
+      C326 254 316 263 322 264
+      C331 266 339 257 348 256
+      C358 255 367 261 385 251" stroke="#ef4a2b"/>
+  </g>
+</svg>
