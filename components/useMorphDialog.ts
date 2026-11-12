@@ -9,15 +9,15 @@ import { prefersReducedMotion } from "@/lib/motion";
   un-clipped to full size. Content tagged [data-stagger] fades in once the
   surface has grown. Closing runs it backwards.
 */
-const EASE_IO = "cubic-bezier(.7, 0, .2, 1)";
-const EASE_OUT = "cubic-bezier(.16, 1, .3, 1)";
+export const EASE_IO = "cubic-bezier(.7, 0, .2, 1)";
+export const EASE_OUT = "cubic-bezier(.16, 1, .3, 1)";
 const FULL = "inset(0px 0px 0px 0px round 24px)";
 const CONTENT_DELAY = 380;
 
 const clipTo = (card: DOMRect, panel: DOMRect) =>
   `inset(${card.top - panel.top}px ${panel.right - card.right}px ${panel.bottom - card.bottom}px ${card.left - panel.left}px round 22px)`;
 
-function lockScroll(on: boolean) {
+export function lockScroll(on: boolean) {
   const root = document.documentElement;
   document.body.style.paddingRight = on ? `${innerWidth - root.clientWidth}px` : "";
   root.style.overflow = on ? "hidden" : "";

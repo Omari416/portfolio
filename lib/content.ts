@@ -24,12 +24,12 @@ export const skills = [
 ];
 
 export const about =
-  "Je suis ingénieur Full Stack, titulaire d'un master en ingénierie des systèmes d'information et basé à Tunis. Je travaille à distance pour Nextise GmbH et j'accompagne en parallèle des clients en freelance. Mon terrain de jeu : le web, le mobile et l'IA appliquée, quand la technique sert un besoin concret. Payer par Mobile Money, former des jeunes au numérique, donner accès à du contenu de qualité en français.";
+  "Ingénieur Full Stack, diplômé d'un master en ingénierie des systèmes d'information. Je construis des produits web, mobiles et d'IA appliquée qui répondent à des besoins concrets : payer par Mobile Money, se former au numérique, lire du contenu de qualité en français.";
 
 export const facts = [
   { title: "Master", text: "Ingénierie des SI" },
   { title: "Tunis", text: "Basé en Tunisie" },
-  { title: "Nextise GmbH", text: "Full remote" },
+  { title: "Full remote", text: "Équipes internationales" },
   { title: "Freelance", text: "Clients en direct" },
 ];
 

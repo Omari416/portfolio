@@ -27,6 +27,7 @@ export default function ScrollEffects() {
     // Scroll-driven: about words, process steps.
     const aboutText = document.getElementById("aboutText");
     const aboutWords = aboutText ? [...aboutText.querySelectorAll(".w")] : [];
+    const aboutSection = aboutText?.closest<HTMLElement>("section");
     const steps = document.getElementById("steps");
     const stepEls = steps ? [...steps.querySelectorAll<HTMLElement>(".step")] : [];
     const stepsNow = document.getElementById("stepsNow");
@@ -51,8 +52,10 @@ export default function ScrollEffects() {
       const vh = innerHeight;
       if (aboutText) {
         const r = aboutText.getBoundingClientRect();
-        const lit = Math.floor(clamp((vh * 0.85 - r.top) / (r.height + vh * 0.3)) * aboutWords.length);
+        const p = clamp((vh * 0.85 - r.top) / (r.height + vh * 0.3));
+        const lit = Math.floor(p * aboutWords.length);
         aboutWords.forEach((w, i) => w.classList.toggle("is-lit", i < lit));
+        aboutSection?.style.setProperty("--about-p", p.toFixed(3));
       }
       if (steps) {
         // A step lights up once its top crosses 60% of the viewport.

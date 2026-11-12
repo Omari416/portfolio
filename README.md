@@ -13,4 +13,4 @@ npm run build && npm start
 - `components/IntroShell.tsx` : timeline d'intro du header (phases p1 → p6)
 - `components/Hero.tsx` : header (fenêtre, carrousel, curseurs, faisceau)
 - `components/sections/` : sections de la page
-- `public/omari.jpg` : photo du header (monogramme « KO » en attendant)
+- `public/profile.jpg` : photo du header, 600 px de large suffisent (monogramme « KO » si elle manque)

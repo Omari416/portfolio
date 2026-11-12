@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { hero } from "@/lib/content";
 import { hasFinePointer, prefersReducedMotion } from "@/lib/motion";
 import CursorIcon from "./CursorIcon";
 import Dust from "./Dust";
+import PortraitZoom from "./PortraitZoom";
 
 const SIDE_CARDS = 4;
 
@@ -67,17 +67,15 @@ export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
       </div>
 
       <div className="stage" id="stage">
-        <div className="window" ref={windowRef} aria-hidden="true">
+        {/* Not aria-hidden: the portrait inside is a real button. The rest of the window has no content to announce. */}
+        <div className="window" ref={windowRef}>
           <div className="window__bar"><i /><i /><i /></div>
           <div className="window__view">
             <div className="track">
               {sideCards}
               <div className="card card--main">
                 <b />
-                <div className="card__photo">
-                  <span className="card__mono">KO</span>
-                  {hasPhoto && <Image src="/omari.jpg" alt="" fill sizes="96px" priority />}
-                </div>
+                <PortraitZoom hasPhoto={hasPhoto} />
               </div>
               {sideCards}
             </div>

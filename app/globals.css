@@ -90,7 +90,12 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   font-size: 13px;
   letter-spacing: .02em;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s, box-shadow .3s;
 }
+.nav__logo img { object-fit: cover; object-position: 50% 22%; }
+.nav__logo:hover { border-color: var(--line-2); box-shadow: 0 0 0 3px var(--accent-soft); }
 
 .nav__links {
   display: flex;
@@ -262,12 +267,28 @@ img { display: block; max-width: 100%; }
   transition: opacity 1.2s ease, filter 1.2s ease, scale 1.6s var(--ease-out);
 }
 .p3 .card__photo { opacity: 1; filter: blur(0); scale: 1; }
+/* The portrait is a button that opens the photo full size (PortraitZoom). */
+button.card__photo {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: zoom-in;
+}
+button.card__photo:disabled { cursor: default; }
+button.card__photo:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 14px; }
+button.card__photo img { transition: scale .8s var(--ease-out), filter .6s ease; }
+button.card__photo:not(:disabled):hover img { scale: 1.06; filter: grayscale(.3) contrast(1.05); }
 .card__photo img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 22%;
   filter: grayscale(1) contrast(1.05);
 }
 .card__mono {
@@ -530,10 +551,45 @@ img { display: block; max-width: 100%; }
 /* ---------------------------------------------------------
    ABOUT
    --------------------------------------------------------- */
+.about__grid {
+  --about-p: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.about__grid .facts { grid-template-columns: repeat(2, 1fr); row-gap: 22px; }
+
+.about__photo { margin: 32px 0 0; }
+.about__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--bg-2);
+  clip-path: inset(100% 0 0 0 round 22px);
+  transition: clip-path 1.4s var(--ease-io);
+}
+.about__frame img {
+  object-fit: cover;
+  object-position: 50% 22%;
+  scale: 1.15;
+  /* --about-p is inherited from .about__grid, fed by the scroll position of the text. */
+  filter: grayscale(calc(1 - var(--about-p))) contrast(1.05);
+  transition: scale 1.8s var(--ease-out);
+}
+.about__photo.is-in .about__frame,
+.site:not(.is-live) .about__frame { clip-path: inset(0 0 0 0 round 22px); }
+.about__photo.is-in .about__frame img { scale: 1; }
+.about__photo figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 14px; }
+.about__photo figcaption b { font-weight: 500; }
+.about__photo figcaption span { color: var(--muted); }
+
 .about__text {
   margin: 32px 0 0;
   max-width: 1000px;
-  font-size: clamp(24px, 3.3vw, 40px);
+  font-size: clamp(22px, 2.6vw, 34px);
   line-height: 1.25;
   font-weight: 500;
   letter-spacing: -.02em;
@@ -580,22 +636,22 @@ img { display: block; max-width: 100%; }
 }
 
 /* Sticky stage: the illustration of the step being read */
-.stage {
+.pstage {
   transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform .7s var(--ease-out);
   will-change: transform;
 }
-.stage__bar {
+.pstage__bar {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--line);
 }
-.stage__n { color: #555; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.stage__n b { color: var(--accent); font-weight: 600; }
-.stage__title { font-family: var(--serif); font-size: 18px; }
-.stage__phase {
+.pstage__n { color: #555; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pstage__n b { color: var(--accent); font-weight: 600; }
+.pstage__title { font-family: var(--serif); font-size: 18px; }
+.pstage__phase {
   margin-left: auto;
   padding: 3px 10px;
   border-radius: 999px;
@@ -607,8 +663,8 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
 }
 /* 3:2 frame, capped so the whole sticky stage still fits on short laptop screens. */
-.stage__art { position: relative; aspect-ratio: 3 / 2; max-height: calc(100svh - 330px); min-height: 240px; }
-.stage__art .art {
+.pstage__art { position: relative; aspect-ratio: 3 / 2; max-height: calc(100svh - 330px); min-height: 240px; }
+.pstage__art .art {
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -616,16 +672,16 @@ img { display: block; max-width: 100%; }
   filter: blur(10px);
   transition: opacity .5s ease, scale .9s var(--ease-out), filter .6s ease;
 }
-.stage__art .art.is-active { opacity: 1; scale: 1; filter: none; }
-.stage__progress {
+.pstage__art .art.is-active { opacity: 1; scale: 1; filter: none; }
+.pstage__progress {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 6px;
   padding: 14px 18px 16px;
   border-top: 1px solid var(--line);
 }
-.stage__progress i { position: relative; height: 3px; border-radius: 3px; background: #1c1c1c; overflow: hidden; }
-.stage__progress i::after {
+.pstage__progress i { position: relative; height: 3px; border-radius: 3px; background: #1c1c1c; overflow: hidden; }
+.pstage__progress i::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -634,8 +690,8 @@ img { display: block; max-width: 100%; }
   background: #6d6d6d;
   transition: scale .7s var(--ease-out), background .4s;
 }
-.stage__progress i.is-lit::after { scale: 1 1; }
-.stage__progress i.is-current::after { scale: 1 1; background: var(--accent); }
+.pstage__progress i.is-lit::after { scale: 1 1; }
+.pstage__progress i.is-current::after { scale: 1 1; background: var(--accent); }
 
 .phases { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .phases li {
@@ -1187,6 +1243,38 @@ img { display: block; max-width: 100%; }
 .case__nav button:hover { color: var(--text); }
 .case__nav span { color: #555; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
 
+/* Portrait lightbox */
+.portrait {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: hidden;
+}
+.portrait[open] { display: grid; place-items: center; }
+.portrait::backdrop { background: transparent; }
+.portrait__fig { position: relative; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.portrait__photo {
+  height: min(80svh, 1100px);
+  max-width: calc(100vw - 32px);
+  transform-origin: 0 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, .7);
+  cursor: zoom-out;
+}
+.portrait__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait__cap { color: var(--muted); font-size: 14px; }
+.portrait__cap b { color: var(--text); font-weight: 500; }
+.portrait__close { position: fixed; top: 20px; right: 20px; translate: none; z-index: 2; }
+
 /* Siyé visual */
 .phone {
   position: absolute;
@@ -1678,9 +1766,11 @@ img { display: block; max-width: 100%; }
    --------------------------------------------------------- */
 @media (max-width: 960px) {
   .classroom__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about__grid { grid-template-columns: 1fr; }
+  .about__photo { max-width: 420px; }
   .process__grid { grid-template-columns: 1fr; gap: 40px; }
   .process__aside { position: static; }
-  .process__aside .stage { display: none; }
+  .process__aside .pstage { display: none; }
   .step__art {
     display: block;
     margin: -26px -28px 20px;

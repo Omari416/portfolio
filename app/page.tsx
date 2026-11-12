@@ -14,17 +14,17 @@ import Stack from "@/components/sections/Stack";
 import Trainer from "@/components/sections/Trainer";
 import { skills } from "@/lib/content";
 
-// Drop your portrait at public/omari.jpg; the "KO" monogram shows until then.
-const hasPhoto = existsSync(path.join(process.cwd(), "public", "omari.jpg"));
+// Portrait at public/profile.jpg (600px wide is plenty); the "KO" monogram shows if it is missing.
+const hasPhoto = existsSync(path.join(process.cwd(), "public", "profile.jpg"));
 
 export default function Home() {
   return (
     <IntroShell>
-      <Nav />
+      <Nav hasPhoto={hasPhoto} />
       <main>
         <Hero hasPhoto={hasPhoto} />
         <Marquee items={skills} label="Compétences" />
-        <About />
+        <About hasPhoto={hasPhoto} />
         <Process />
         <Projects />
         <Trainer />

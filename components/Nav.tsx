@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { navLinks } from "@/lib/content";
 
-export default function Nav() {
+export default function Nav({ hasPhoto }: { hasPhoto: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState(0);
 
@@ -28,7 +29,9 @@ export default function Nav() {
 
   return (
     <header className={scrolled ? "nav is-scrolled" : "nav"}>
-      <a href="#accueil" className="nav__logo" aria-label="Accueil">KO</a>
+      <a href="#accueil" className="nav__logo" aria-label="Accueil">
+        {hasPhoto ? <Image src="/profile.jpg" alt="" fill sizes="42px" /> : "KO"}
+      </a>
       <nav className="nav__links" aria-label="Navigation principale">
         {navLinks.map((l, i) => (
           <a key={l.href} href={l.href} className={i === active ? "is-active" : undefined}>
