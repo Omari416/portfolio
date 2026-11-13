@@ -42,10 +42,15 @@ function fadeOut(panel: HTMLElement) {
 
 /**
  * @param count   number of cards the dialog can page through
- * @param onShown called once the panel content for the current item is in place,
- *                with the delay (ms) before that content starts appearing
+ * @param onShown   called once the panel content for the current item is in place,
+ *                  with the delay (ms) before that content starts appearing
+ * @param onClosing called as soon as closing starts (e.g. to silence a video)
  */
-export function useMorphDialog(count: number, onShown?: (panel: HTMLElement, delay: number) => void) {
+export function useMorphDialog(
+  count: number,
+  onShown?: (panel: HTMLElement, delay: number) => void,
+  onClosing?: (panel: HTMLElement) => void
+) {
   const [open, setOpen] = useState<number | null>(null);
   const cards = useRef<(HTMLElement | null)[]>([]);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -55,6 +60,8 @@ export function useMorphDialog(count: number, onShown?: (panel: HTMLElement, del
   const busy = useRef(false);
   const shown = useRef(onShown);
   shown.current = onShown;
+  const closing = useRef(onClosing);
+  closing.current = onClosing;
 
   useLayoutEffect(() => {
     const d = dialog.current;
@@ -115,6 +122,7 @@ export function useMorphDialog(count: number, onShown?: (panel: HTMLElement, del
     if (open === null || busy.current || !d || !p) return;
     busy.current = true;
     const card = cards.current[open]!;
+    closing.current?.(p);
 
     if (!prefersReducedMotion()) {
       const r = card.getBoundingClientRect();

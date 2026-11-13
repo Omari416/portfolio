@@ -1,20 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { projects } from "@/lib/content";
-import ProjectVisual from "./ProjectVisual";
 import { useMorphDialog } from "./useMorphDialog";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-// Let the visual's own CSS transitions (bars, mail lines) play once it is shown.
-function replayVisual(panel: HTMLElement, delay: number) {
-  const visual = panel.querySelector(".case__visual");
-  visual?.classList.remove("is-in");
-  setTimeout(() => visual?.classList.add("is-in"), delay + 120);
-}
-
 export default function ProjectGrid() {
-  const { open, cards, panel, scrim, show, go, close, dialogProps } = useMorphDialog(projects.length, replayVisual);
+  const { open, cards, panel, scrim, show, go, close, dialogProps } = useMorphDialog(projects.length);
 
   const p = open === null ? null : projects[open];
   const prev = open === null ? null : projects[(open - 1 + projects.length) % projects.length];
@@ -34,7 +27,19 @@ export default function ProjectGrid() {
             }}
           >
             <div className="project__chrome"><i /><i /><i /><span>{proj.url}</span></div>
-            <ProjectVisual type={proj.visual} />
+            {proj.shots && proj.device === "phone" ? (
+              <div className="project__visual project__phones">
+                {proj.shots.slice(0, 3).map((s) => (
+                  <div className="device" key={s.src}>
+                    <Image src={s.src} alt={s.alt} fill sizes="140px" />
+                  </div>
+                ))}
+              </div>
+            ) : proj.shots ? (
+              <div className="project__visual project__shot">
+                <Image src={proj.shots[0].src} alt={proj.shots[0].alt} fill sizes="(max-width: 960px) 100vw, 560px" />
+              </div>
+            ) : null}
             <div className="project__body">
               <p className="project__kind">{proj.kind}</p>
               <h3>{proj.name}</h3>
@@ -64,9 +69,23 @@ export default function ProjectGrid() {
                   </svg>
                 </button>
               </div>
-              <div className="case__visual" data-stagger>
-                <ProjectVisual type={p.visual} />
-              </div>
+              {p.shots && p.device === "phone" ? (
+                <div className="case__phones">
+                  {p.shots.map((s) => (
+                    <figure key={s.src} className="device" data-stagger>
+                      <Image src={s.src} alt={s.alt} fill sizes="260px" />
+                    </figure>
+                  ))}
+                </div>
+              ) : p.shots ? (
+                <div className="case__shots">
+                  {p.shots.map((s) => (
+                    <figure key={s.src} className="case__shot" data-stagger>
+                      <Image src={s.src} alt={s.alt} width={1600} height={800} sizes="(max-width: 1100px) 100vw, 1040px" />
+                    </figure>
+                  ))}
+                </div>
+              ) : null}
               <div className="case__body">
                 <header className="case__head" data-stagger>
                   <p className="project__kind">{p.kind}</p>
@@ -91,9 +110,11 @@ export default function ProjectGrid() {
                   <ul className="stack">
                     {p.stack.map((s) => <li key={s}>{s}</li>)}
                   </ul>
-                  <a className="case__link" href={`https://${p.url}`} target="_blank" rel="noreferrer">
-                    Visiter {p.url} ↗
-                  </a>
+                  {p.visit && (
+                    <a className="case__link" href={p.visit} target="_blank" rel="noreferrer">
+                      Visiter {p.url} ↗
+                    </a>
+                  )}
                 </div>
                 <nav className="case__nav" data-stagger aria-label="Autres projets">
                   <button type="button" onClick={() => go(-1)}>← {prev.name}</button>

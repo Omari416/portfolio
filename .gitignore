@@ -1,6 +1,10 @@
 # Vidéo de référence (inspiration), pas à publier
 porto.mp4
 
+# Originaux lourds : seules leurs versions compressées sont publiées
+public/Video_Portfolio_1.mp4
+public/profile.PNG
+
 # Next.js
 node_modules/
 .next/

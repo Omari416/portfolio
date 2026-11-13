@@ -1,15 +1,18 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import type { CSSProperties } from "react";
-import { lessons, trainings } from "@/lib/content";
+import { lessons, trainerStats, trainerVideo, trainings } from "@/lib/content";
 import ClassroomGrid from "../ClassroomGrid";
 import Counter from "../Counter";
 import Label from "../Label";
+import TrainerVideo from "../TrainerVideo";
+import TrainingCarousel from "../TrainingCarousel";
 
-const hasFile = (id: string) => existsSync(path.join(process.cwd(), "public", "formations", `${id}.mp4`));
+const hasFile = (file: string) => existsSync(path.join(process.cwd(), "public", "formations", file));
 
 export default function Trainer() {
-  const items = lessons.map((l) => ({ ...l, hasVideo: hasFile(l.id) }));
+  const items = lessons.map((l) => ({ ...l, hasVideo: hasFile(`${l.id}.mp4`) }));
+  const hasPresentation = hasFile("presentation-720.mp4");
 
   return (
     <section className="section trainer" id="formateur">
@@ -20,25 +23,37 @@ export default function Trainer() {
         <em>de mon métier.</em>
       </h2>
       <p className="classroom__intro" data-reveal>
-        Des extraits de vraies sessions, enregistrées en visio avec mes apprenants. Pas de mise en scène :
-        un cas concret, de la pratique, et des corrections en direct.
+        Des sessions réelles, en visio, avec mes apprenants. Pas de mise en scène : un cas concret, de la pratique,
+        et des corrections en direct.
       </p>
 
-      <div className="classroom" data-reveal>
-        <ClassroomGrid items={items} />
-      </div>
+      <ul className="tstats" data-reveal>
+        {trainerStats.map((s) => (
+          <li key={s.label}>
+            <strong>
+              <Counter value={s.value} />
+              {s.suffix && <em>{s.suffix}</em>}
+            </strong>
+            <span>{s.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      {hasPresentation && (
+        <div className="tvideo-wrap" data-reveal>
+          <TrainerVideo lqip={trainerVideo.lqip} />
+        </div>
+      )}
+
+      {/* Short extracts by theme: shown once at least one extract file exists. */}
+      {items.some((l) => l.hasVideo) && (
+        <div className="classroom" data-reveal>
+          <ClassroomGrid items={items} />
+        </div>
+      )}
 
       <div className="trainer__grid">
-        <article className="bootcamp" data-reveal data-glow>
-          <p className="project__kind">Bootcamp</p>
-          <div className="bootcamp__big">
-            <Counter value={4} />
-            <small>mois</small>
-          </div>
-          <h3>Bootcamp MERN</h3>
-          <p>MongoDB, Express, React et Node, avec les outils d&apos;IA intégrés au quotidien du développeur.</p>
-          <div className="bootcamp__bar"><i /></div>
-        </article>
+        <TrainingCarousel />
         <div className="courses" data-reveal>
           <p className="courses__intro">Je conçois aussi des formations complètes :</p>
           <ul className="pills">

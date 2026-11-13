@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 
 /*
-  The six process illustrations (sources in public/process/*.svg), inlined so
+  The six process illustrations, inlined so
   CSS can animate their parts. Classes, all driven by `.art.is-active`:
     d       stroke draws itself in (needs pathLength="1")
     f       fades / rises in

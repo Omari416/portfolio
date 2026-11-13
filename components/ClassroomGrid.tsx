@@ -155,7 +155,18 @@ export default function ClassroomGrid({ items }: { items: Lesson[] }) {
                 </div>
                 <div className="case__foot" data-stagger>
                   <span className="lesson__note">Extrait diffusé avec l&apos;accord des participants.</span>
-                  <a className="case__link" href="#contact" onClick={close}>Organiser une formation</a>
+                  <a
+                    className="case__link"
+                    href="#contact"
+                    onClick={async (e) => {
+                      // Scrolling is locked while the dialog is open: close first, then go.
+                      e.preventDefault();
+                      await close();
+                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    Organiser une formation
+                  </a>
                 </div>
                 {shown.length > 1 && (
                   <nav className="case__nav" data-stagger aria-label="Autres extraits">

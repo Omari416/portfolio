@@ -133,15 +133,21 @@ export const steps: {
   },
 ];
 
-export type ProjectVisual = "siye" | "kontakly" | "narrat" | "hub";
 
 export const projects: {
   name: string;
+  // Libellé affiché dans la barre façon navigateur.
   url: string;
+  // Lien « Visiter » : uniquement pour un site vérifié en ligne.
+  visit?: string;
   kind: string;
   description: string;
   stack: string[];
-  visual: ProjectVisual;
+  // Illustration animée, utilisée tant qu'il n'y a pas de captures.
+  // Captures réelles (public/projects/). La première remplace l'illustration sur la carte.
+  shots?: { src: string; alt: string }[];
+  // "phone" : captures d'app mobile, affichées dans des cadres de téléphone.
+  device?: "phone";
   // Étude de cas affichée quand la carte s'ouvre.
   challenge: string;
   built: string[];
@@ -154,7 +160,11 @@ export const projects: {
     description:
       "Marketplace pour travailleurs indépendants en Afrique de l'Ouest et en RDC, avec paiements Mobile Money (Orange Money, M-Pesa, Airtel Money) et messagerie temps réel.",
     stack: ["React Native / Expo", "Node.js", "TypeScript", "PostgreSQL", "Prisma"],
-    visual: "siye",
+    device: "phone",
+    shots: [
+      { src: "/projects/siye-1.webp", alt: "Siyé : liste des talents avec tarifs, notes et villes" },
+      { src: "/projects/siye-2.webp", alt: "Siyé : tableau de bord client et actions rapides" },
+    ],
     challenge:
       "Permettre à des travailleurs indépendants de trouver des clients et d'être payés, dans des pays où la carte bancaire est rare et où le réseau mobile est instable.",
     built: [
@@ -171,11 +181,15 @@ export const projects: {
   {
     name: "Kontakly",
     url: "kontakly.com",
+    visit: "https://kontakly.com",
     kind: "SaaS B2B · Prospection & CRM",
     description:
       "Prospection par email et CRM : génération d'emails par IA, gestion de campagnes, recherche de leads et planification.",
     stack: ["Flask", "PostgreSQL", "Kubernetes", "IA"],
-    visual: "kontakly",
+    shots: [
+      { src: "/projects/kontakly-2.webp", alt: "Kontakly : recherche de leads avec filtres, résultats et statistiques" },
+      { src: "/projects/kontakly-1.webp", alt: "Kontakly : page d'accueil" },
+    ],
     challenge:
       "Donner aux équipes commerciales un seul outil pour trouver des prospects, leur écrire et suivre la relation, sans jongler entre plusieurs abonnements.",
     built: [
@@ -196,7 +210,12 @@ export const projects: {
     description:
       "Plateforme de contenu en français en 13 modules, avec plus de 60 modèles de données et 29 écrans conçus.",
     stack: ["NestJS", "Prisma", "React Native"],
-    visual: "narrat",
+    device: "phone",
+    shots: [
+      { src: "/projects/narrat-1.webp", alt: "Narrat : accueil avec série de jours, ligue et verset du jour" },
+      { src: "/projects/narrat-3.webp", alt: "Narrat : catalogue des défis" },
+      { src: "/projects/narrat-2.webp", alt: "Narrat : onglet Découvrir" },
+    ],
     challenge:
       "Proposer du contenu de qualité en français dans un produit assez riche pour couvrir 13 domaines, sans qu'il devienne un labyrinthe.",
     built: [
@@ -216,7 +235,7 @@ export const projects: {
     kind: "Écosystème edtech",
     description: "Un écosystème pour démocratiser les compétences numériques en Afrique francophone.",
     stack: ["Next.js", "Prisma", "PostgreSQL"],
-    visual: "hub",
+    shots: [{ src: "/projects/siyehub-1.webp", alt: "Siyé Hub : page d'accueil et domaines de formation" }],
     challenge:
       "Rendre les compétences numériques accessibles en Afrique francophone, des bases du web jusqu'à l'IA.",
     built: [
@@ -227,6 +246,78 @@ export const projects: {
     tech: [
       "Application Next.js",
       "Données PostgreSQL modélisées avec Prisma",
+    ],
+  },
+  {
+    name: "ETG Center",
+    url: "etg-center",
+    kind: "Gestion d'église multi-sites",
+    description:
+      "Gestion pastorale et administrative d'une église : siège à Kinshasa et extensions en RDC et à l'international, avec présences, suivi des membres, finances multi-devises et logistique.",
+    stack: ["Next.js", "Supabase", "PostgreSQL", "PWA", "Vercel"],
+    shots: [
+      { src: "/projects/etg-1.webp", alt: "ETG Center : tableau de bord, présences sur 8 semaines et santé spirituelle" },
+      { src: "/projects/etg-2.webp", alt: "ETG Center : finances par caisse et par canal, en dollars et en francs congolais" },
+    ],
+    challenge:
+      "Donner au siège une vue consolidée de toutes les extensions, sans que chaque responsable voie plus que ce que son rôle autorise.",
+    built: [
+      "Pointage des présences en temps réel, utilisable hors ligne",
+      "Finances multi-devises par caisse et par canal (espèces, banque, Mobile Money), reçus PDF",
+      "Formulaires publics, circuits de validation et consolidation multi-extensions",
+    ],
+    tech: [
+      "Rôles cumulables appliqués en base par les règles RLS de PostgreSQL",
+      "Supabase : authentification, temps réel et stockage",
+      "Migrations testées sur un vrai Postgres en WASM, sans Docker",
+    ],
+  },
+  {
+    name: "GreenLine CRM",
+    url: "greenline-crm",
+    kind: "CRM B2B · Négoce d'énergies vertes",
+    description:
+      "CRM sur mesure pour une société de négoce d'énergies renouvelables : offres, carnet d'ordres, transactions, prix internes et tableaux de bord KPI.",
+    stack: ["Next.js", "Prisma", "MySQL", "Docker", "Kubernetes"],
+    shots: [{ src: "/projects/greenline-1.webp", alt: "GreenLine CRM : tableau de bord avec les prix de marché TTF, THE et ZTP" }],
+    challenge:
+      "Un outil où chaque rôle (trader, manager, opérations, stagiaire) ne voit que les marges, prix et contacts qui le concernent.",
+    built: [
+      "Offres, carnet d'ordres et suivi des transactions de bout en bout",
+      "Tableaux de bord KPI et prix de marché en direct",
+      "Rôles et permissions fins, double authentification par email",
+    ],
+    tech: [
+      "Next.js et Prisma sur MySQL",
+      "Permissions par rôle, synchronisées avec le code à chaque démarrage",
+      "Tests de bout en bout avec Playwright et Cypress, déploiement conteneurisé",
+    ],
+  },
+  {
+    name: "Kash",
+    url: "kashapp.tech",
+    visit: "https://kashapp.tech",
+    kind: "Marketplace locale · App mobile",
+    description:
+      "Tout ce qui se vend près de vous à Kinshasa : commerces, produits et services réunis dans une app, avec des prix à jour et les promos du quartier.",
+    stack: ["React Native / Expo", "Express", "TypeScript", "PostgreSQL", "Redis"],
+    device: "phone",
+    shots: [
+      { src: "/projects/kash-1.webp", alt: "Kash : accueil et catégories de commerces" },
+      { src: "/projects/kash-2.webp", alt: "Kash : liste des articles avec prix en francs congolais" },
+      { src: "/projects/kash-3.webp", alt: "Kash : exploration par catégorie" },
+    ],
+    challenge:
+      "Rendre visibles les commerces de quartier de Kinshasa et leurs prix réels, sur des téléphones et des connexions modestes.",
+    built: [
+      "Recherche de produits, services et commerces par quartier",
+      "Panier, favoris, promotions et commerces premium",
+      "Scanner, relances personnalisées et mode hors ligne",
+    ],
+    tech: [
+      "App React Native / Expo avec cache hors ligne et file de synchronisation",
+      "API Express en TypeScript, PostgreSQL via Prisma, Redis",
+      "Paiement en ligne et OTP par SMS intégrés côté serveur",
     ],
   },
 ];
@@ -240,9 +331,66 @@ export const trainings = [
   "Access",
   "Git",
   "Bases de données",
+  "Next.js",
+  "Laravel",
 ];
 
-export const lessonThemes = ["Excel", "Word", "Python", "Java / POO"] as const;
+// Carrousel « Formateur ». `value` (nombre) s'anime en compteur ; sinon `big` s'affiche tel quel.
+export const trainingSlides: {
+  kicker: string;
+  value?: number;
+  big?: string;
+  unit?: string;
+  title: string;
+  text: string;
+}[] = [
+  {
+    kicker: "Bootcamp",
+    value: 4,
+    unit: "mois",
+    title: "Bootcamp MERN",
+    text: "MongoDB, Express, React et Node, avec les outils d'IA intégrés au quotidien du développeur.",
+  },
+  {
+    kicker: "Format",
+    big: "1:1",
+    unit: "en visio",
+    title: "Cours individuels",
+    text: "Au rythme de chaque apprenant : il pratique sur son propre écran, je corrige en direct.",
+  },
+  {
+    kicker: "Évaluation",
+    big: "Exam",
+    unit: "blanc",
+    title: "Exercices notés",
+    text: "Des sujets en plusieurs parties notées, traités comme en conditions réelles, pour Excel comme pour Word.",
+  },
+  {
+    kicker: "Étendue",
+    big: "Word",
+    unit: "→ Laravel",
+    title: "Du clic au code",
+    text: "De la bureautique aux frameworks web : chaque apprenant part de son niveau et avance vers ses objectifs.",
+  },
+];
+
+export const trainerStats:{ value: number; suffix?: string; label: string }[] = [
+  { value: 150, suffix: "+", label: "apprenants formés" },
+  { value: trainings.length, label: "formations conçues" },
+  { value: 4, label: "mois de bootcamp MERN" },
+];
+
+// Vidéo de présentation : fichiers générés dans public/formations/ (teaser, poster, 720p, 1080p).
+export const trainerVideo = {
+  title: "Mes formations, en vrai",
+  summary: "Un montage de sessions réelles en visio : Excel, Word, Python. Les apprenants pratiquent sur leur écran, je corrige en direct.",
+  duration: "3:06",
+  ratio: 1880 / 914,
+  // Poster réduit à 24 px, flouté à l'affichage : visible avant tout téléchargement.
+  lqip: "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAMABgDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAQGAQP/xAAkEAACAQMCBwEBAAAAAAAAAAABAhEABAUDIQYSFiJj0eExkv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAGREBAAIDAAAAAAAAAAAAAAAAAAECEUFh/9oADAMBAAIRAxEAPwB3T4FwraQYm5/BPePVdOgcMYE3P9j1UqvHmYVAoW1geL7W9fZnba128X2gfXBY9S6NoLK80SSTAMA0VNNnb5rh9c6i87gg9oiDRVjGy3H/2Q==",
+};
+
+export const lessonThemes =["Excel", "Word", "Python", "Java / POO"] as const;
 export type LessonTheme = (typeof lessonThemes)[number];
 
 // Extraits de vraies sessions. Fichiers attendus : public/formations/<id>.mp4 et <id>.jpg (poster).
@@ -321,6 +469,6 @@ export const offCode = [
 
 // TODO : remplacer par tes vrais liens publics
 export const contact = {
-  email: "contact@exemple.com",
-  linkedin: "https://www.linkedin.com/",
+  email: "kayumbaomari27@gmail.com",
+  linkedin: "https://www.linkedin.com/in/omari-kayumba-2973a420b/",
 };
